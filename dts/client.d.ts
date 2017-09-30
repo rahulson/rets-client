@@ -1,4 +1,4 @@
-import { IClientMetadata } from './metadata' 
+import { IClientMetadata, IRecordMetadata, IClassMetadata } from './metadata' 
 import { IClientSearch } from './search'
 import { IClientObjects, IObjectData } from './object'
 import { RetsReplyError } from './errors'
@@ -47,8 +47,8 @@ export class Client {
    * https://github.com/sbruno81/rets-client/blob/master/lib/clientModules/object.coffee
    */
   objects: IClientObjects
-  login: Promise<any>
-  logout: Promise<any>
+  login: () => Promise<any>
+  logout: () => Promise<any>
 }
 /**
  * https://github.com/sbruno81/rets-client/blob/master/lib/utils/queryOptions.coffee
@@ -80,36 +80,14 @@ export interface IQueryOptions {
   select?: string
   method?: RETS_METHOD
 }
-export interface IBaseResponse {
+export interface IRetsResponse<TResult> {
+  results: TResult[]
   headerInfo: IHeaderInfo
   replyCode: number
   replyTag: ReplyTag
   replyText: string
 }
-export interface IGetResourcesResponse extends IBaseResponse {
-  results: {
-    info?: any
-    metadata?: IRecordMetadata[]
-  }[]
-  type?: 'METADATA-RESOURCE'
-}
-export interface IGetClassResponse extends IBaseResponse {
-  results: {
-    info?: any
-    metadata?: IClassMetadata[]
-  }[]
-  type?: 'METADATA-RESOURCE',
-  entriesReceived?: number
-}
-export interface IGetTableResponse extends IBaseResponse {
-  results: ITableResult[]
-  type: 'METADATA-RESOURCE'
-  entriesReceived: number
-}
-export interface ITableResult {
-  info?: any
-  metadata?: ITableMetadata[]
-}
+
 export type ReplyTag = 'OPERATION_SUCCESSFUL'
 export interface IHeaderInfo {
   cacheControl: string
@@ -128,7 +106,7 @@ export interface IHeaderInfo {
   vary: string
   date: string
 }
-export interface IQueryResponse extends IGetResourcesResponse {
+export interface IQueryResponse extends IRetsResponse<any> {
   /** true when there are more results to obtain */
   maxRowsExceeded: boolean
   /** number of records returned */
@@ -186,46 +164,7 @@ export interface IClass {
   metadata?: IClassMetadata[]
   info?: {}
 }
-export interface ITable {
-  metadata?: ITableMetadata[]
-  info?: {}
-}
-export interface IRecordMetadata {
-  ResourceID?: string
-  StandardName?: string
-  VisibleName?: string
-  ClassDate?: string
-  ObjectVersion?: string
-  ObjectDate?: string
-  SearchHelpVersion?: string
-  SearchHelpDate?: string
-  EditMaskVersion?: string
-  EditMaskDate?: string
-  LookupVersion?: string
-  LookupDate?: string
-  UpdateHelpVersion?: string
-  UpdateHelpDate?: string
-  ValidationExpressionVersion?: string
-  ValidationExpressionDate?: string
-  ValidationLookupVersion?: string
-  ValidationLookupDate?: string
-  ValidationExternalVersion?: string
-  ValidationExternalDate?: string
-}
-export interface IClassMetadata {
-  _ResourceID?: string
-  ClassName?: string
-  StandardName?: string
-  VisibleName?: string
-  TableVersion?: string
-}
-export interface ITableMetadata {
-  MetadataEntryID?: string
-  SystemName?: string
-  ShortName?: string
-  LongName?: string
-  DataType?: string
-}
+
 export interface IErrorInfo {
   error?: Error
   stack?: any
