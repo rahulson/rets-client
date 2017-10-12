@@ -16,9 +16,9 @@ export interface IClientMetadata {
 
   getLookupTypes (resourceId: string, classType?: string): Promise<IGetLookupTypesResponse>
 
-  getForeignKeys(resourceId: string, classType?: string): Promise<IGetForeignKeysResponse>
+  getForeignKeys (resourceId: string, classType?: string): Promise<IGetForeignKeysResponse>
 
-  getObject(resourceId: string, classType?: string): Promise<IGetObjectResponse>
+  getObject (resourceId: string, classType?: string): Promise<IGetObjectResponse>
 
   getAllClass (): Promise<IGetTableResponse>
 
@@ -41,7 +41,7 @@ export interface IMetadataResult<TMetdata> {
   metadata: TMetdata[];
 }
 
-export interface ITableResult extends IMetadataResult<ITableMetadata> {}
+export interface ITableResult extends IMetadataResult<ITableMetadata> { }
 
 
 export interface IGetResourcesResponse extends IRetsResponse<IMetadataResult<IRecordMetadata>> {
@@ -78,7 +78,7 @@ export interface IGetLookupTypesResponse extends IRetsResponse<IMetadataLookupRe
   entriesReceived: number
 }
 
-interface MetadataLookupTypes {
+export interface MetadataLookupTypes {
   results: MetadataLookupResult[];
   type: string;
   headerInfo: IHeaderInfo;
@@ -88,19 +88,19 @@ interface MetadataLookupTypes {
   entriesReceived: number;
 }
 
-interface MetadataLookupResult {
+export interface MetadataLookupResult {
   info: MetadataLookupInfo;
   metadata: MetadataLookupValue[];
 }
 
-interface MetadataLookupValue {
+export interface MetadataLookupValue {
   MetadataEntryID: string;
   LongValue: string;
   ShortValue: string;
   Value: string;
 }
 
-interface MetadataLookupInfo {
+export interface MetadataLookupInfo {
   Resource: string
   Version: string
   Date: string
@@ -108,7 +108,7 @@ interface MetadataLookupInfo {
   rowsReceived: number
 }
 
-interface MetadataInfo {
+export interface MetadataInfo {
   Resource: string
   Class?: string
   Version: string
@@ -176,15 +176,15 @@ export interface ITableMetadata {
   SearchHelpID?: string
   Unique?: string
   InKeyIndex?: string
-  
+
 }
 
 export interface MetadataLookup {
   Date: string
-  LookupName:string
-  MetadataEntryID:string
-  Version:string
-  VisibleName:string
+  LookupName: string
+  MetadataEntryID: string
+  Version: string
+  VisibleName: string
 }
 export interface MetadataLookupType {
   Value: string
