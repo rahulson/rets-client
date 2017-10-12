@@ -3,7 +3,7 @@
   "version": "5.1.0",
   "description": "A RETS client (Real Estate Transaction Standard).",
   "main": "index.js",
-  "typings": "dts/index.ts",
+  "types": "dts/index.d.ts",
   "dependencies": {
     "base64-stream": "^0.1.3",
     "bluebird": "^2.9.25",
