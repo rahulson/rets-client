@@ -26,6 +26,7 @@
     "mocha": "^3.5.3",
     "source-map-support": "^0.4.18",
     "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "typescript": "^2.5.3"
   },
   "files": [
@@ -34,7 +35,9 @@
     "index.js"
   ],
   "scripts": {
-    "pretest": "coffee --compile --output dist/ lib/ && tsc --noEmit",
+    "pretest": "npm run compile && npm run tslint",
+    "tslint": "tslint dts/* --fix",
+    "compile": "coffee --compile --output dist/ lib/ && tsc --noEmit",
     "test": "node_modules/mocha/bin/_mocha --compilers ts-node/register test/*.ts",
     "prepublish": "npm run test",
     "dev": "coffee --watch --output dist lib/"
