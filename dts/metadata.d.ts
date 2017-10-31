@@ -43,7 +43,7 @@ export interface IMetadataResult<TMetdata> {
 export type ITableResult = IMetadataResult<ITableMetadata>;
 
 
-export interface IGetResourcesResponse extends IRetsResponse<IMetadataResult<IRecordMetadata>> {
+export interface IGetResourcesResponse extends IRetsResponse<IMetadataResult<IMetadataResource>> {
   type: 'METADATA-RESOURCE';
 }
 
@@ -138,8 +138,8 @@ export interface IRecordMetadata {
   ValidationExternalVersion?: string;
   ValidationExternalDate?: string;
 }
-export interface IClassMetadata {
-  ClassName: string;
+
+export interface IMetadataResource extends IRecordMetadata{
   StandardName: string;
   VisibleName: string;
   TableVersion: string;
@@ -148,7 +148,13 @@ export interface IClassMetadata {
   UpdateVersion: string;
   UpdateDate: string;
   HasKeyIndex: string;
+  KeyField: string;
 }
+
+export interface IClassMetadata extends IMetadataResource {
+  ClassName: string;
+}
+
 export interface ITableMetadata {
   MetadataEntryID?: string;
   SystemName?: string;
