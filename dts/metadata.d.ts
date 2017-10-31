@@ -139,7 +139,7 @@ export interface IRecordMetadata {
   ValidationExternalDate?: string;
 }
 
-export interface IMetadataResource extends IRecordMetadata{
+export interface IMetadataResource extends IRecordMetadata {
   StandardName: string;
   VisibleName: string;
   TableVersion: string;
