@@ -34,11 +34,7 @@
     "index.js"
   ],
   "scripts": {
-    "pretest": "npm run compile && npm run tslint",
-    "tslint": "tslint dts/* --fix",
-    "compile": "coffee --compile --output dist/ lib/ && tsc --noEmit",
-    "test": "node_modules/mocha/bin/_mocha --compilers ts-node/register test/*.ts",
-    "prepare": "npm run test",
+    "compile": "coffee --compile --output dist/ lib/",
     "dev": "coffee --watch --output dist lib/"
   },
   "repository": {
