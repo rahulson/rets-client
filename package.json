@@ -3,7 +3,7 @@
   "version": "5.2.1",
   "description": "A RETS client (Real Estate Transaction Standard).",
   "main": "index.js",
-  "types": "dts/index.d.ts",
+  "typings": "dts/index.ts",
   "dependencies": {
     "base64-stream": "^0.1.3",
     "bluebird": "^2.9.25",
@@ -25,7 +25,6 @@
     "mocha": "^3.5.3",
     "source-map-support": "^0.4.18",
     "ts-node": "^3.3.0",
-    "tslint": "^5.8.0",
     "typescript": "^2.5.3"
   },
   "files": [
@@ -34,7 +33,7 @@
     "index.js"
   ],
   "scripts": {
-    "compile": "coffee --compile --output dist/ lib/",
+    "prepare": "coffee --compile --output dist/ lib/",
     "dev": "coffee --watch --output dist lib/"
   },
   "repository": {
