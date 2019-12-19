@@ -11,9 +11,6 @@ package-lock.json
 #ignore integration test configs
 testconfig.json
 
-#ignore build directory
-dist
-
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
