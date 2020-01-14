@@ -158,18 +158,24 @@
 
   })();
 
-  Client.getAutoLogoutClient = function(settings, handler) {
-    return Promise["try"](function() {
-      var client;
-      client = new Client(settings);
-      return client.login().then(function() {
-        return Promise["try"](function() {
-          return handler(client);
-        })["finally"](function() {
-          return client.logout();
+  Client.getAutoLogoutClient = async function(settings, handler) {
+    return new Promise(function(resolve, reject) {
+      try {
+        var client;
+        client = new Client(settings);
+        return client.login().then(function() {
+          return Promise["try"](function() {
+            resolve(client) 
+          })["finally"](function() {
+            return client.logout();
+          });
         });
-      });
-    });
+        
+      } catch (error) {
+        reject(error)
+      }
+
+    })
   };
 
   module.exports = Client;
